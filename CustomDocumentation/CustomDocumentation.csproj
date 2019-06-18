@@ -283,6 +283,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Plugins\customDocumentation\CustomDocumentationApi.cs" />
     <Compile Include="App_Plugins\customDocumentation\CustomDocumentationTreeController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -294,6 +295,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\customDocumentation\backoffice\customDocumentationTree\edit.html" />
     <Content Include="App_Plugins\customDocumentation\Lang\en-US.xml" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.controller.js" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.htm" />
@@ -350,6 +352,7 @@
     <Content Include="config\BackOfficeTours\getting-started.json" />
     <Content Include="config\applications.config" />
     <Content Include="config\404handlers.config" />
+    <Content Include="Documentation\README.md" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -388,7 +391,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="App_Plugins\customDocumentation\backoffice\customDocumentationTree\" />
+    <Folder Include="App_Plugins\customDocumentation\Dashboard\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
