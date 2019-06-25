@@ -2,6 +2,8 @@
 using System.IO;
 using System.Net.Http.Formatting;
 using System.Web;
+using umbraco;
+using umbraco.BusinessLogic.Actions;
 using Umbraco.Web.Models.Trees;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.Trees;
@@ -20,7 +22,9 @@ namespace CustomDocumentation.App_Plugins.customDocumentation
 
         protected override MenuItemCollection GetMenuForNode(string id, FormDataCollection queryStrings)
         {
-            throw new NotImplementedException();
+            var menuNodes = new MenuItemCollection();
+            menuNodes.Items.Add<RefreshNode, ActionRefresh>("Reload");
+            return menuNodes;
         }
 
         private TreeNodeCollection CreateTreeNodeCollection(string id, FormDataCollection queryStrings)
