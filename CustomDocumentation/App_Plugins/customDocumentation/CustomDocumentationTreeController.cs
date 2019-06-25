@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http.Formatting;
+using System.Web;
 using Umbraco.Web.Models.Trees;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.Trees;
@@ -47,11 +48,11 @@ namespace CustomDocumentation.App_Plugins.customDocumentation
 
         private void ReadFolder()
         {
-            var path = "~/Documentation";
+            var path = HttpContext.Current.Server.MapPath(@"~/Documentation");
             var directoryName = Path.GetFileName(path);
             var currentDirectoryPath = Directory.GetCurrentDirectory();
             var res = AppDomain.CurrentDomain.BaseDirectory;
-            var directories = Directory.GetDirectories(currentDirectoryPath+ @"\Documentation");
+            var directories = Directory.GetDirectories(path);
         }
     }
 }
