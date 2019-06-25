@@ -12,9 +12,9 @@ namespace CustomDocumentation.App_Plugins.customDocumentation
     [PluginController("customDocumentation")]
     public class CustomDocumentationTreeController : TreeController
     {
+        private readonly string mainFolderName = "Documentation";
         protected override TreeNodeCollection GetTreeNodes(string id, FormDataCollection queryStrings)
         {
-            ReadFolder();
             return CreateTreeNodeCollection(id, queryStrings);
         }
 
@@ -30,6 +30,7 @@ namespace CustomDocumentation.App_Plugins.customDocumentation
             {
                 return TopLevel(id, queryStrings);
             }
+            nodes = GetChildren(id, queryStrings);
             return nodes;
         }
 
@@ -40,19 +41,56 @@ namespace CustomDocumentation.App_Plugins.customDocumentation
             return topNodes;
         }
 
-        //private TreeNodeCollection GetChildren(string id, FormDataCollection queryStrings)
-        //{
-        //    var 
-        //    return new TreeNodeCollection();
-        //}
-
-        private void ReadFolder()
+        private TreeNodeCollection GetChildren(string parentId, FormDataCollection queryStrings)
         {
-            var path = HttpContext.Current.Server.MapPath(@"~/Documentation");
-            var directoryName = Path.GetFileName(path);
-            var currentDirectoryPath = Directory.GetCurrentDirectory();
-            var res = AppDomain.CurrentDomain.BaseDirectory;
+            string[][] folderChildren;
+            if (parentId == "Top")
+                folderChildren = ReadFolder(mainFolderName);
+            else
+                folderChildren = ReadFolder(mainFolderName + "\\" + parentId);
+            var directories = folderChildren[0];
+            var files = folderChildren[1];
+            var folderNodes = GetTreeFolders(parentId, queryStrings, directories);
+            var fileNodes = GetTreeFiles(parentId, queryStrings, files);
+            folderNodes.AddRange(fileNodes);
+            return folderNodes;
+        }
+
+        private TreeNodeCollection GetTreeFolders(string parentId, FormDataCollection queryStrings, string[] folders)
+        {
+            var treeFolders = new TreeNodeCollection();
+            foreach (var folder in folders)
+            {
+                var folderParts = folder.Split(new string[] { mainFolderName }, StringSplitOptions.None);
+                var partAfterMainFolder = folderParts[folderParts.Length-1];
+                var distinctFolderNames = partAfterMainFolder.Split('\\');
+                var name = distinctFolderNames[distinctFolderNames.Length - 1];
+                var hasChildren = Directory.GetFiles(folder).Length != 0;
+                treeFolders.Add(CreateTreeNode($"{partAfterMainFolder}", parentId, queryStrings, name, "icon-folder", hasChildren));
+            }
+            return treeFolders;
+        }
+
+        private TreeNodeCollection GetTreeFiles(string parentId, FormDataCollection queryStrings, string[] files)
+        {
+            var treeFiles = new TreeNodeCollection();
+            foreach (var file in files)
+            {
+                var parts = file.Split(new string[] { mainFolderName }, StringSplitOptions.None);
+                var partAfterMain = parts[parts.Length - 1];
+                var distinctNames = partAfterMain.Split('\\');
+                var name = distinctNames[distinctNames.Length - 1];
+                treeFiles.Add(CreateTreeNode($"{parentId}-{name}", parentId, queryStrings, name, "icon-file", false));
+            }
+            return treeFiles;
+        }
+
+        private string[][] ReadFolder(string folderName)
+        {
+            var path = HttpContext.Current.Server.MapPath($"~\\{folderName}");
             var directories = Directory.GetDirectories(path);
+            var files = Directory.GetFiles(path);
+            return new[] { directories, files };
         }
     }
 }
