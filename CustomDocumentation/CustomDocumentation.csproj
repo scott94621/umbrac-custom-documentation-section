@@ -94,6 +94,9 @@
     <Reference Include="Lucene.Net, Version=2.9.4.1, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
       <HintPath>..\packages\Lucene.Net.2.9.4.1\lib\net40\Lucene.Net.dll</HintPath>
     </Reference>
+    <Reference Include="Markdig, Version=0.17.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Markdig.0.17.0\lib\net40\Markdig.dll</HintPath>
+    </Reference>
     <Reference Include="MarkdownSharp, Version=1.14.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Markdown.1.14.7\lib\net45\MarkdownSharp.dll</HintPath>
     </Reference>
@@ -283,7 +286,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Plugins\customDocumentation\CustomDocumentationApi.cs" />
+    <Compile Include="Controllers\CustomDocumentationController.cs" />
     <Compile Include="App_Plugins\customDocumentation\CustomDocumentationTreeController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -295,6 +298,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\customDocumentation\backoffice\controllers\edit.controller.js" />
     <Content Include="App_Plugins\customDocumentation\backoffice\customDocumentationTree\edit.html" />
     <Content Include="App_Plugins\customDocumentation\Lang\en-US.xml" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.controller.js" />
@@ -354,6 +358,7 @@
     <Content Include="config\404handlers.config" />
     <Content Include="Documentation\README.md" />
     <Content Include="Documentation\Child1\README.md" />
+    <Content Include="App_Plugins\customDocumentation\package.manifest" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
