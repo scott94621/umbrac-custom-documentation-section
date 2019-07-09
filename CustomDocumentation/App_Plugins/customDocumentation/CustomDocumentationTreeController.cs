@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web;
 using umbraco;
@@ -47,35 +49,37 @@ namespace CustomDocumentation.App_Plugins.customDocumentation
 
         private TreeNodeCollection GetChildren(string parentId, FormDataCollection queryStrings)
         {
-            string[][] folderChildren;
+            Tuple<IEnumerable<string>, IEnumerable<string>> folderChildren;
             if (parentId == "Top")
                 folderChildren = ReadFolder(mainFolderName);
             else
-                folderChildren = ReadFolder(mainFolderName + "\\" + parentId);
-            var directories = folderChildren[0];
-            var files = folderChildren[1];
+                folderChildren = ReadFolder(mainFolderName + "/" + parentId);
+            var directories = folderChildren.Item1;
+            var files = folderChildren.Item2;
+            files = files.ToList().Where(file => !file.Contains("README.md"));
+
             var folderNodes = GetTreeFolders(parentId, queryStrings, directories);
             var fileNodes = GetTreeFiles(parentId, queryStrings, files);
             folderNodes.AddRange(fileNodes);
             return folderNodes;
         }
 
-        private TreeNodeCollection GetTreeFolders(string parentId, FormDataCollection queryStrings, string[] folders)
+        private TreeNodeCollection GetTreeFolders(string parentId, FormDataCollection queryStrings, IEnumerable<string> folders)
         {
             var treeFolders = new TreeNodeCollection();
             foreach (var folder in folders)
             {
                 var folderParts = folder.Split(new string[] { mainFolderName }, StringSplitOptions.None);
-                var partAfterMainFolder = folderParts[folderParts.Length-1];
+                var partAfterMainFolder = folderParts[folderParts.Length - 1];
                 var distinctFolderNames = partAfterMainFolder.Split('\\');
                 var name = distinctFolderNames[distinctFolderNames.Length - 1];
                 var hasChildren = Directory.GetFiles(folder).Length != 0;
-                treeFolders.Add(CreateTreeNode($"{partAfterMainFolder}", parentId, queryStrings, name, "icon-folder", hasChildren));
+                treeFolders.Add(CreateTreeNode($"{name}", parentId, queryStrings, name, "icon-folder", hasChildren));
             }
             return treeFolders;
         }
 
-        private TreeNodeCollection GetTreeFiles(string parentId, FormDataCollection queryStrings, string[] files)
+        private TreeNodeCollection GetTreeFiles(string parentId, FormDataCollection queryStrings, IEnumerable<string> files)
         {
             var treeFiles = new TreeNodeCollection();
             foreach (var file in files)
@@ -89,12 +93,12 @@ namespace CustomDocumentation.App_Plugins.customDocumentation
             return treeFiles;
         }
 
-        private string[][] ReadFolder(string folderName)
+        private Tuple<IEnumerable<string>, IEnumerable<string>> ReadFolder(string folderName)
         {
             var path = HttpContext.Current.Server.MapPath($"~\\{folderName}");
             var directories = Directory.GetDirectories(path);
             var files = Directory.GetFiles(path);
-            return new[] { directories, files };
+            return new Tuple<IEnumerable<string>, IEnumerable<string>>(directories, files);
         }
     }
 }
