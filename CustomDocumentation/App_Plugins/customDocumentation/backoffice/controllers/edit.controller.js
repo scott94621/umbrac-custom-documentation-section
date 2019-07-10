@@ -29,18 +29,19 @@ angular.module('umbraco').controller('cDoc.DocumentationController', ['$scope', 
         return path.split("edit/")[1];
     }
 
-    function addEventToTreeElements() {
-        const mainRoot = $("li[data-element=tree-item-documentation]");
-
+    function setTitle() {
+        let filePath = getFilePath();
+        let filePathParts = filePath.split('-');
+        let fileName = filePathParts[filePathParts.length - 1];
+        let fileNameWithoutExtension = fileName.replace(".md", "");
+        $scope.title = fileNameWithoutExtension;
     }
 
     function init() {
+        setTitle();
         var htmlCode = getHtmlCode("/umbraco/backoffice/api/CustomDocumentation/GetHtmlForRoute");
         setHtmlCode(htmlCode);
     }
 
     init();
-    $scope.setEventHandlers = function () {
-        addEventToTreeElements();
-    };
 }]);

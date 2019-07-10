@@ -1,33 +1,30 @@
-﻿
-<div data-element="editor-header" class="umb-editor-header umb-panel-header">
+﻿<div ng-controller="cDoc.DocumentationController">
+    <div class="umb-editor-header umb-panel-header">
 
-    <div class="umb-panel-header-content-wrapper">
+        <div class="umb-panel-header-content-wrapper">
 
-        <div class="umb-panel-header-content">
+            <div class="umb-panel-header-content">
 
-            <div class="umb-panel-header-left-side -top-position">
+                <div class="umb-panel-header-left-side -top-position">
 
-                <div class="umb-panel-header-title-wrapper">
-                    Joepie docs
+                    <div class="umb-panel-header-title-wrapper">
+                        {{ title }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div data-element="editor-container" class="umb-editor-container umb-panel-body umb-scrollable row-fluid">
-    <div class="umb-pane">
-        <div class="form-horizontal tab-content ">
-            <div class="umb-tab-pane ">
-                <div class="umb-tab-pane-inner">
-                    <div ng-controller="cDoc.DocumentationController" ng-init="setEventHandlers">
+    <div class="umb-editor-container umb-panel-body umb-scrollable row-fluid">
+        <div class="umb-pane">
+            <div class="form-horizontal tab-content ">
+                <div class="umb-tab-pane ">
+                    <div class="umb-tab-pane-inner">
                         <div id="markdownDiv">
 
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
     </div>
 </div>
