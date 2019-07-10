@@ -16,7 +16,6 @@ namespace CustomDocumentation.App_Plugins.customDocumentation
     [PluginController("customDocumentation")]
     public class CustomDocumentationTreeController : TreeController
     {
-        private readonly string mainFolderName = "Documentation";
         protected override TreeNodeCollection GetTreeNodes(string id, FormDataCollection queryStrings)
         {
             return CreateTreeNodeCollection(id, queryStrings);
@@ -43,17 +42,17 @@ namespace CustomDocumentation.App_Plugins.customDocumentation
         private TreeNodeCollection TopLevel(string id, FormDataCollection queryStrings)
         {
             var topNodes = new TreeNodeCollection();
-            topNodes.Add(CreateTreeNode("Top", id, queryStrings, "Documentation", "icon-folder", true));
+            topNodes.Add(CreateTreeNode(Constants.MAIN_FOLDER_NAME, id, queryStrings, "Documentation", "icon-folder", true));
             return topNodes;
         }
 
         private TreeNodeCollection GetChildren(string parentId, FormDataCollection queryStrings)
         {
             Tuple<IEnumerable<string>, IEnumerable<string>> folderChildren;
-            if (parentId == "Top")
-                folderChildren = ReadFolder(mainFolderName);
+            if (parentId == Constants.MAIN_FOLDER_NAME)
+                folderChildren = ReadFolder(Constants.MAIN_FOLDER_NAME);
             else
-                folderChildren = ReadFolder(mainFolderName + "/" + parentId);
+                folderChildren = ReadFolder(Constants.MAIN_FOLDER_NAME + "/" + parentId);
             var directories = folderChildren.Item1;
             var files = folderChildren.Item2;
             files = files.ToList().Where(file => !file.Contains("README.md"));
@@ -69,7 +68,7 @@ namespace CustomDocumentation.App_Plugins.customDocumentation
             var treeFolders = new TreeNodeCollection();
             foreach (var folder in folders)
             {
-                var folderParts = folder.Split(new string[] { mainFolderName }, StringSplitOptions.None);
+                var folderParts = folder.Split(new string[] { Constants.MAIN_FOLDER_NAME }, StringSplitOptions.None);
                 var partAfterMainFolder = folderParts[folderParts.Length - 1];
                 var distinctFolderNames = partAfterMainFolder.Split('\\');
                 var name = distinctFolderNames[distinctFolderNames.Length - 1];
@@ -84,7 +83,7 @@ namespace CustomDocumentation.App_Plugins.customDocumentation
             var treeFiles = new TreeNodeCollection();
             foreach (var file in files)
             {
-                var parts = file.Split(new string[] { mainFolderName }, StringSplitOptions.None);
+                var parts = file.Split(new string[] { Constants.MAIN_FOLDER_NAME }, StringSplitOptions.None);
                 var partAfterMain = parts[parts.Length - 1];
                 var distinctNames = partAfterMain.Split('\\');
                 var name = distinctNames[distinctNames.Length - 1];
