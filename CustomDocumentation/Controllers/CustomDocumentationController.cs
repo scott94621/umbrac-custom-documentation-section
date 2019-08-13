@@ -1,55 +1,59 @@
 ﻿using CustomDocumentation.App_Plugins.customDocumentation;
 using Markdig;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.Http.Results;
-using System.Web.Mvc;
-using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
 
 namespace Controllers
 {
-    public class CustomDocumentationController: UmbracoAuthorizedApiController
+    public class CustomDocumentationController : UmbracoAuthorizedApiController
     {
-        private const string MD_EXTENSION = ".md";
-        private const string TXT_EXTENSION = ".txt";
-        private const string HTML_EXTENSION = ".html";
-        private const string README = "README.md";
-
         public JsonResult<string> GetHtmlForRoute(string filePath)
         {
-            if (!HasFileMdExtension(filePath))
-            {
-                if (IsFileParentFolder(filePath))
-                    filePath = filePath.Replace(Constants.MAIN_FOLDER_NAME, "");    
-                
-                filePath = $"{filePath}-{README}";
-            }
-            var path = CreateReadablePath(filePath);
+            var editedFilePath = CheckExtensions(filePath);
+            var path = CreateReadablePath(editedFilePath);
             var fileContent = File.ReadAllText(path);
-            using(var reader = new StreamReader(path))
+            using (var reader = new StreamReader(path))
             {
                 fileContent = reader.ReadToEnd();
             }
-            var result = Markdown.ToHtml(fileContent);
-
+            var result = fileContent;
+            if (HasFileMdExtension(editedFilePath))
+                result = Markdown.ToHtml(fileContent);
             return Json(result);
+        }
+
+        private string CheckExtensions(string filePath)
+        {
+            if (!HasFileMdExtension(filePath) && !HasFileHtmlExtension(filePath) && !HasFileTxtExtension(filePath))
+            {
+                if (IsFileParentFolder(filePath))
+                    filePath = filePath.Replace(Constants.MAIN_FOLDER_NAME, "");
+
+                filePath = $"{filePath}-{Constants.README}";
+            }
+            return filePath;
         }
 
         private string CreateReadablePath(string filePath)
         {
             var pathParts = filePath.Split('-');
             var relativePath = string.Join("/", pathParts);
-            return HttpContext.Current.Server.MapPath("/Documentation/"+relativePath);
+            return HttpContext.Current.Server.MapPath("/Documentation/" + relativePath);
         }
 
         private bool HasFileMdExtension(string filePath)
         {
-            return filePath.Contains(MD_EXTENSION);
+            return filePath.Contains(Constants.MD_EXTENSION);
+        }
+        private bool HasFileHtmlExtension(string filePath)
+        {
+            return filePath.Contains(Constants.HTML_EXTENSION);
+        }
+        private bool HasFileTxtExtension(string filePath)
+        {
+            return filePath.Contains(Constants.TXT_EXTENSION);
         }
 
         private bool IsFileParentFolder(string filePath)

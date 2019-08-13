@@ -331,6 +331,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="default.aspx" />
+    <Content Include="Documentation\Html children\main child.html" />
+    <Content Include="Documentation\Txt children\main child.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
