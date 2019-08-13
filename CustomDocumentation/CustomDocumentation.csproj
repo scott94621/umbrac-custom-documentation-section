@@ -301,6 +301,7 @@
   <ItemGroup>
     <Content Include="App_Plugins\customDocumentation\backoffice\controllers\edit.controller.js" />
     <Content Include="App_Plugins\customDocumentation\backoffice\customDocumentationTree\edit.html" />
+    <Content Include="App_Plugins\customDocumentation\css\main.css" />
     <Content Include="App_Plugins\customDocumentation\Dashboard\cDocDashboard.html" />
     <Content Include="App_Plugins\customDocumentation\Lang\en-US.xml" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.controller.js" />

@@ -4,7 +4,6 @@ This is an Umbraco package (WIP) where the goal is for project developers to eas
 
 ## TODO
 
-* Make large files fit in the view
 * Make html be an accepted view
 * Make txt be an accepted view
 * Publish?
