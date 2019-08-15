@@ -13,8 +13,8 @@ angular.module('umbraco').controller('cDoc.DocumentationController', ['$scope', 
             success: function (data) {
                 successResult = data;
             },
-            error: function (jqXHR, textStatus) {
-                notificationsService.error("Something went wrong while getting the html code. " + textStatus);
+            error: function (jqXHR, textStatus, errorThrown) {
+                notificationsService.error("Something went wrong while getting the html code. " + textStatus + " " + errorThrown);
             }
         });
         return successResult;
