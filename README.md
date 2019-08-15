@@ -8,5 +8,10 @@ This is an Umbraco package (WIP) where the goal is for project developers to eas
 * Test versions 7 and 8
 
 * Publish?
+	* Test different browsers
+	* Test package installer
+	* Write documentation for usage
+	* Add basic umbraco languages
+	
 * Add dashboard for editing
 * Add possibility of editing folder names in umbraco
