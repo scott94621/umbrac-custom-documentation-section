@@ -7,6 +7,8 @@ This is an Umbraco package (WIP) where the goal is for project developers to eas
 * fix bug with '-' in the name of a file (use different delimiter)
 * Add css to html possibility
 * Add clear error message in the failed to get html
-* Testen van versies 7 en 8
+* Test versions 7 and 8
+
 * Publish?
 * Add dashboard for editing
+* Add possibility of editing folder names in umbraco

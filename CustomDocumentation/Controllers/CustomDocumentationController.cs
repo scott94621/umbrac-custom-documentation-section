@@ -1,5 +1,6 @@
 ﻿using CustomDocumentation.App_Plugins.customDocumentation;
 using Markdig;
+using System;
 using System.IO;
 using System.Web;
 using System.Web.Http.Results;
@@ -13,15 +14,28 @@ namespace Controllers
         {
             var editedFilePath = CheckExtensions(filePath);
             var path = CreateReadablePath(editedFilePath);
-            var fileContent = File.ReadAllText(path);
-            using (var reader = new StreamReader(path))
+            try
             {
-                fileContent = reader.ReadToEnd();
+                var fileContent = File.ReadAllText(path);
+                using (var reader = new StreamReader(path))
+                {
+                    fileContent = reader.ReadToEnd();
+                }
+                var result = fileContent;
+                if (HasFileMdExtension(editedFilePath))
+                    result = Markdown.ToHtml(fileContent);
+                return Json(result);
             }
-            var result = fileContent;
-            if (HasFileMdExtension(editedFilePath))
-                result = Markdown.ToHtml(fileContent);
-            return Json(result);
+            catch (FileNotFoundException e)
+            {
+                Logger.Error(typeof(CustomDocumentationController), $"The file at path {path} was not found", e);
+                return Json("File was not found");
+            }
+            catch(Exception e)
+            {
+                Logger.Error(typeof(CustomDocumentationController), "", e);
+                return Json("Something went wrong");
+            }
         }
 
         private string CheckExtensions(string filePath)
@@ -31,16 +45,16 @@ namespace Controllers
                 if (IsFileParentFolder(filePath))
                     filePath = filePath.Replace(Constants.MAIN_FOLDER_NAME, "");
 
-                filePath = $"{filePath}-{Constants.README}";
+                filePath = $"{filePath}&{Constants.README}";
             }
             return filePath;
         }
 
         private string CreateReadablePath(string filePath)
         {
-            var pathParts = filePath.Split('-');
-            var relativePath = string.Join("/", pathParts);
-            return HttpContext.Current.Server.MapPath("/Documentation/" + relativePath);
+            //var pathParts = filePath.Split('&');
+            //var relativePath = string.Join("/", pathParts);
+            return HttpContext.Current.Server.MapPath("/Documentation/" + filePath);
         }
 
         private bool HasFileMdExtension(string filePath)

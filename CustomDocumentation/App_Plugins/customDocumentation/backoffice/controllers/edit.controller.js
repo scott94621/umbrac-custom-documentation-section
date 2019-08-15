@@ -25,16 +25,30 @@ angular.module('umbraco').controller('cDoc.DocumentationController', ['$scope', 
     }
 
     function getFilePath() {
-        var path = $location.path();
-        return path.split("edit/")[1];
+        let path = $location.path();
+        let partAfterEdit = path.split("edit/")[1];
+        return partAfterEdit.replace('&', '/');
     }
 
     function setTitle() {
         let filePath = getFilePath();
-        let filePathParts = filePath.split('-');
+        let filePathParts = filePath.split('/');
         let fileName = filePathParts[filePathParts.length - 1];
-        let fileNameWithoutExtension = fileName.replace(".md", "");
+        let fileNameWithoutExtension = removeExtension(fileName);
         $scope.title = fileNameWithoutExtension;
+    }
+
+    function removeExtension(fileName) {
+        if (fileName.includes(".md")) {
+            return fileName.replace(".md", "");
+        }
+        if (fileName.includes(".html")) {
+            return fileName.replace(".html", "");
+        }
+        if (fileName.includes(".txt")) {
+            return fileName.replace(".txt", "");
+        }
+        return fileName;
     }
 
     function init() {

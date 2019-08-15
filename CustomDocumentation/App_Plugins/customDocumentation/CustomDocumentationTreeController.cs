@@ -48,11 +48,7 @@ namespace CustomDocumentation.App_Plugins.customDocumentation
 
         private TreeNodeCollection GetChildren(string parentId, FormDataCollection queryStrings)
         {
-            Tuple<IEnumerable<string>, IEnumerable<string>> folderChildren;
-            if (parentId == Constants.MAIN_FOLDER_NAME)
-                folderChildren = ReadFolder(Constants.MAIN_FOLDER_NAME);
-            else
-                folderChildren = ReadFolder(Constants.MAIN_FOLDER_NAME + "/" + parentId);
+            var folderChildren = GetFolderChildren(parentId);
             var directories = folderChildren.Item1;
             var files = folderChildren.Item2;
             files = files.ToList().Where(file => !file.Contains("README.md"));
@@ -87,7 +83,7 @@ namespace CustomDocumentation.App_Plugins.customDocumentation
                 var partAfterMain = parts[parts.Length - 1];
                 var distinctNames = partAfterMain.Split('\\');
                 var name = distinctNames[distinctNames.Length - 1];
-                treeFiles.Add(CreateTreeNode($"{parentId}-{name}", parentId, queryStrings, name, "icon-file", false));
+                treeFiles.Add(CreateTreeNode($"{parentId}&{name}", parentId, queryStrings, name, "icon-file", false));
             }
             return treeFiles;
         }
@@ -98,6 +94,19 @@ namespace CustomDocumentation.App_Plugins.customDocumentation
             var directories = Directory.GetDirectories(path);
             var files = Directory.GetFiles(path);
             return new Tuple<IEnumerable<string>, IEnumerable<string>>(directories, files);
+        }
+
+        private Tuple<IEnumerable<string>, IEnumerable<string>> GetFolderChildren(string parentId)
+        {
+            Tuple<IEnumerable<string>, IEnumerable<string>> folderChildren;
+            if (parentId == Constants.MAIN_FOLDER_NAME)
+                folderChildren = ReadFolder(Constants.MAIN_FOLDER_NAME);
+            else
+            {
+                var folderPath = parentId.Replace('&','/');
+                folderChildren = ReadFolder(Constants.MAIN_FOLDER_NAME + "/" + parentId);
+            }
+            return folderChildren;
         }
     }
 }
