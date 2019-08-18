@@ -45,15 +45,13 @@ namespace Controllers
                 if (IsFileParentFolder(filePath))
                     filePath = filePath.Replace(Constants.MAIN_FOLDER_NAME, "");
 
-                filePath = $"{filePath}&{Constants.README}";
+                filePath = $"{filePath}/{Constants.README}";
             }
             return filePath;
         }
 
         private string CreateReadablePath(string filePath)
         {
-            //var pathParts = filePath.Split('&');
-            //var relativePath = string.Join("/", pathParts);
             return HttpContext.Current.Server.MapPath("/Documentation/" + filePath);
         }
 
