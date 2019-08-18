@@ -39,13 +39,13 @@ angular.module('umbraco').controller('cDoc.DocumentationController', ['$scope', 
     }
 
     function removeExtension(fileName) {
-        if (fileName.includes(".md")) {
+        if (fileName.indexOf(".md") !== -1) {
             return fileName.replace(".md", "");
         }
-        if (fileName.includes(".html")) {
+        if (fileName.indexOf(".html") !== -1) {
             return fileName.replace(".html", "");
         }
-        if (fileName.includes(".txt")) {
+        if (fileName.indexOf(".txt") !== -1) {
             return fileName.replace(".txt", "");
         }
         return fileName;
