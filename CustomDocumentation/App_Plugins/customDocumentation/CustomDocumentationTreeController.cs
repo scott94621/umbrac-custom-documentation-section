@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web;
-using umbraco;
 using umbraco.BusinessLogic.Actions;
 using Umbraco.Web.Models.Trees;
 using Umbraco.Web.Mvc;
@@ -103,7 +102,7 @@ namespace CustomDocumentation.App_Plugins.customDocumentation
                 folderChildren = ReadFolder(Constants.MAIN_FOLDER_NAME);
             else
             {
-                var folderPath = parentId.Replace('&','/');
+                var folderPath = parentId.Replace('&', '/');
                 folderChildren = ReadFolder(Constants.MAIN_FOLDER_NAME + "/" + parentId);
             }
             return folderChildren;

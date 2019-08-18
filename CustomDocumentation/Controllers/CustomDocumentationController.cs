@@ -22,7 +22,7 @@ namespace Controllers
                     fileContent = reader.ReadToEnd();
                 }
                 var result = fileContent;
-                if (HasFileMdExtension(editedFilePath))
+                if (ExtensionHelper.HasFileMdExtension(editedFilePath))
                     result = Markdown.ToHtml(fileContent);
                 return Json(result);
             }
@@ -40,7 +40,7 @@ namespace Controllers
 
         private string CheckExtensions(string filePath)
         {
-            if (!HasFileMdExtension(filePath) && !HasFileHtmlExtension(filePath) && !HasFileTxtExtension(filePath))
+            if (!ExtensionHelper.HasFileAllowedExtension(filePath))
             {
                 if (IsFileParentFolder(filePath))
                     filePath = filePath.Replace(Constants.MAIN_FOLDER_NAME, "");
@@ -53,19 +53,6 @@ namespace Controllers
         private string CreateReadablePath(string filePath)
         {
             return HttpContext.Current.Server.MapPath("/Documentation/" + filePath);
-        }
-
-        private bool HasFileMdExtension(string filePath)
-        {
-            return filePath.Contains(Constants.MD_EXTENSION);
-        }
-        private bool HasFileHtmlExtension(string filePath)
-        {
-            return filePath.Contains(Constants.HTML_EXTENSION);
-        }
-        private bool HasFileTxtExtension(string filePath)
-        {
-            return filePath.Contains(Constants.TXT_EXTENSION);
         }
 
         private bool IsFileParentFolder(string filePath)

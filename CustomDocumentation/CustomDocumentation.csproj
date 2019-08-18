@@ -287,6 +287,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Plugins\customDocumentation\Constants.cs" />
+    <Compile Include="App_Plugins\customDocumentation\ExtensionHelper.cs" />
     <Compile Include="Controllers\CustomDocumentationController.cs" />
     <Compile Include="App_Plugins\customDocumentation\CustomDocumentationTreeController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
