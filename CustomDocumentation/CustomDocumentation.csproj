@@ -293,7 +293,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -302,8 +301,6 @@
   <ItemGroup>
     <Content Include="App_Plugins\customDocumentation\backoffice\controllers\edit.controller.js" />
     <Content Include="App_Plugins\customDocumentation\backoffice\customDocumentationTree\edit.html" />
-    <Content Include="App_Plugins\customDocumentation\css\documentationStyles\proceeding.css" />
-    <Content Include="App_Plugins\customDocumentation\css\documentationStyles\test.css" />
     <Content Include="App_Plugins\customDocumentation\css\main.css" />
     <Content Include="App_Plugins\customDocumentation\Dashboard\cDocDashboard.html" />
     <Content Include="App_Plugins\customDocumentation\Lang\en-US.xml" />
@@ -334,8 +331,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="default.aspx" />
-    <Content Include="Documentation\Html children\main child.html" />
-    <Content Include="Documentation\Txt children\main child.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -365,9 +360,7 @@
     <Content Include="config\applications.config" />
     <Content Include="config\404handlers.config" />
     <Content Include="Documentation\README.md" />
-    <Content Include="Documentation\Child1\README.md" />
     <Content Include="App_Plugins\customDocumentation\package.manifest" />
-    <Content Include="Documentation\Child1\Test.md" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
