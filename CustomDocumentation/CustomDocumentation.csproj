@@ -331,6 +331,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="default.aspx" />
+    <Content Include="Documentation\NewFolder1\text.txt" />
+    <Content Include="Documentation\Test.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -361,6 +363,7 @@
     <Content Include="config\404handlers.config" />
     <Content Include="Documentation\README.md" />
     <Content Include="App_Plugins\customDocumentation\package.manifest" />
+    <Content Include="Documentation\Test.md" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
