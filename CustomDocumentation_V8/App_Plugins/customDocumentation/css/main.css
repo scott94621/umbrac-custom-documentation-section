@@ -1,0 +1,33 @@
+﻿/*========================        
+      Necessary css
+========================*/
+.view-height-100{
+    height:100vh;
+}
+/*========================        
+   End necessary css
+========================*/
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.display-vh{
+    height:80vh;
+}
+
+.main-width{
+    width:80%;
+    margin-left:10%;
+}
+.main-text{
+    font-size:17px;
+}
+.margin-top{
+    margin-top:5%;
+}
+
+.align-center{
+    text-align:center;
+}

@@ -1,0 +1,23 @@
+﻿{
+  "javascript": [
+    "~/App_Plugins/customDocumentation/backoffice/controllers/edit.controller.js"
+  ],
+  "css": [
+    "~/App_Plugins/customDocumentation/css/main.css"
+
+  ],
+  "sections": [
+    {
+      "alias": "customDocumentation",
+      "name": "Custom documentation"
+    }
+  ],
+  "dashboards": [
+    {
+      "alias": "customDocumentationDashboard",
+      "view": "/App_Plugins/customDocumentation/Dashboard/cDocDashboard.html",
+      "sections": [ "customDocumentation" ],
+      "weight": 10
+    }
+  ]
+}
