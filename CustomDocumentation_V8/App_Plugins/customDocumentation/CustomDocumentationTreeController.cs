@@ -82,7 +82,15 @@ namespace CustomDocumentation_V8.App_Plugins.customDocumentation
                 var partAfterMain = parts[parts.Length - 1];
                 var distinctNames = partAfterMain.Split('\\');
                 var name = distinctNames[distinctNames.Length - 1];
-                treeFiles.Add(CreateTreeNode($"{parentId}&{name}", parentId, queryStrings, name, "icon-file", false));
+                var fullName = $"{parentId}&{name}";
+                if (parentId == Constants.MAIN_FOLDER_NAME)
+                {
+                    if (!partAfterMain.Contains(Constants.MAIN_FOLDER_NAME))
+                    {
+                        fullName = name;
+                    }
+                }
+                treeFiles.Add(CreateTreeNode(fullName, parentId, queryStrings, name, "icon-file", false));
             }
             return treeFiles;
         }
