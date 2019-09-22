@@ -428,8 +428,6 @@
     <Content Include="config\Lang\sv-SE.user.xml" />
     <Content Include="config\Lang\zh-CN.user.xml" />
     <Content Include="config\logviewer.searches.config.js" />
-    <Content Include="Documentation\NewFolder1\text.txt" />
-    <Content Include="Documentation\Test.html" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -454,7 +452,6 @@
     <Content Include="config\ClientDependency.config" />
     <Content Include="config\BackOfficeTours\getting-started.json" />
     <Content Include="App_Plugins\customDocumentation\package.manifest" />
-    <Content Include="Documentation\Test.md" />
     <Content Include="Documentation\README.md" />
     <None Include="packages.config" />
     <Content Include="Views\Web.config" />
