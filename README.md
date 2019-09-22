@@ -10,7 +10,9 @@ The package supports:
 
 ## Installation
 
-Download the package from [Github](https://github.com/scott94621/umbraco-custom-documentation-section) or get it from [Our Umbraco](). 
+Download the package from [Github](https://github.com/scott94621/umbraco-custom-documentation-section) or get it from [Our Umbraco](https://our.umbraco.com/packages/backoffice-extensions/umbraco-documentation/). There are different versions for Umbraco 7 and Umbraco 8. Choose the version which applies to you.
+
+### Dependencies
 
 This package uses Markdig version 0.17.0 to convert Markdown to Html. Downloading it is required for this package to function. Find it here on [nuget](https://www.nuget.org/packages/Markdig/).
 
@@ -26,11 +28,7 @@ Adding custom css can be done at ~\App_Plugins\customDocumentation\css\. The new
 
 ## Future
 
-* Test versions 7 and 8
-
-* Publish?
-	* Add basic umbraco languages
-
+* Add basic umbraco languages
 * Add dashboard for editing
 * Add possibility of editing folder names in umbraco
 * Add possibility for adding folders and children of three types in section
